@@ -1,12 +1,19 @@
+<div align="center">
+
 # 🔍 DevLens Lite
 
-> **Understand any GitHub repository in minutes** — AI-powered repository intelligence platform.
-[![Live Demo](https://img.shields.io/badge/Live_Demo-aditeesingh.netlify.app-6d4cf5?style=flat-square&logo=netlify&logoColor=white)](https://devlens-lite.netlify.app/)
-![DevLens Banner](https://img.shields.io/badge/DevLens-Lite-6d4cf5?style=for-the-badge&logo=github)
-![Stack](https://img.shields.io/badge/Stack-MERN-00d084?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
+**Understand any GitHub repository in minutes — AI-powered repository intelligence platform.**
 
----
+[![Live Demo](https://img.shields.io/badge/Live_Demo-devlens--lite.netlify.app-6d4cf5?style=for-the-badge&logo=netlify&logoColor=white)](https://devlens-lite.netlify.app/)
+
+![Stack](https://img.shields.io/badge/Stack-MERN-00d084?style=flat-square)
+![React](https://img.shields.io/badge/React_19-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Gemini](https://img.shields.io/badge/Gemini_AI-8E75B2?style=flat-square&logo=google&logoColor=white)
+
+</div>
 
 ## ✨ Features
 

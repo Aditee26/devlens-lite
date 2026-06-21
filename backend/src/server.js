@@ -9,9 +9,9 @@ const PORT = parseInt(process.env.PORT || "4000", 10);
 async function start() {
   await connectDB();
   app.listen(PORT, () => {
-    console.log(`\n🚀  DevLens API  →  http://localhost:${PORT}`);
-    console.log(`    ENV  : ${process.env.NODE_ENV || "development"}`);
-    console.log(`    Mongo: ${process.env.MONGO_URI}\n`);
+    console.log(`\n🚀  DevLens API  →  port ${PORT}`);
+console.log(`    ENV  : ${process.env.NODE_ENV || "development"}`);
+console.log(`    Mongo: connected\n`);
   });
 }
 

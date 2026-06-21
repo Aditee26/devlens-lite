@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --scrollbar-track: #f1f5f9;
+    --scrollbar-thumb: #cbd5e1;
+  }
+  .dark {
+    --scrollbar-track: #0f172a;
+    --scrollbar-thumb: #334155;
+  }
+
+  * { @apply border-gray-200 dark:border-gray-800; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar         { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track   { background: var(--scrollbar-track); }
+  ::-webkit-scrollbar-thumb   { background: var(--scrollbar-thumb); border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: #6d4cf5; }
+
+  ::selection { background: #6d4cf540; }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-white/20 dark:border-white/5;
+  }
+  .card {
+    @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl;
+  }
+  .card-hover {
+    @apply card transition-all duration-200 hover:border-brand-500/50 hover:shadow-lg hover:shadow-brand-500/5;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-sm transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/20 active:scale-95;
+  }
+  .btn-secondary {
+    @apply btn bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 active:scale-95;
+  }
+  .btn-ghost {
+    @apply btn hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 active:scale-95;
+  }
+  .btn-danger {
+    @apply btn bg-red-600 hover:bg-red-500 text-white shadow-lg shadow-red-600/20 active:scale-95;
+  }
+  .input {
+    @apply w-full px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all;
+  }
+  .label {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-purple  { @apply badge bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300; }
+  .badge-green   { @apply badge bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300; }
+  .badge-yellow  { @apply badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300; }
+  .badge-red     { @apply badge bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300; }
+  .badge-blue    { @apply badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300; }
+  .badge-gray    { @apply badge bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400; }
+
+  .page-title    { @apply text-2xl font-bold text-gray-900 dark:text-white tracking-tight; }
+  .section-title { @apply text-lg font-semibold text-gray-900 dark:text-white; }
+  .text-muted    { @apply text-sm text-gray-500 dark:text-gray-400; }
+
+  .skeleton {
+    @apply animate-pulse bg-gray-200 dark:bg-gray-800 rounded-xl;
+  }
+
+  /* Code blocks */
+  pre { @apply font-mono text-sm; }
+  code { @apply font-mono; }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-400 to-violet-400;
+  }
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+}
+
+/* React Flow overrides */
+.react-flow__node {
+  @apply font-sans;
+}
+.react-flow__attribution {
+  display: none !important;
+}

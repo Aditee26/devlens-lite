@@ -1,7 +1,7 @@
 # 🔍 DevLens Lite
 
 > **Understand any GitHub repository in minutes** — AI-powered repository intelligence platform.
-
+[![Live Demo](https://img.shields.io/badge/Live_Demo-aditeesingh.netlify.app-6d4cf5?style=flat-square&logo=netlify&logoColor=white)](https://devlens-lite.netlify.app/)
 ![DevLens Banner](https://img.shields.io/badge/DevLens-Lite-6d4cf5?style=for-the-badge&logo=github)
 ![Stack](https://img.shields.io/badge/Stack-MERN-00d084?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)

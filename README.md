@@ -7,161 +7,205 @@
 ![Stack](https://img.shields.io/badge/Stack-MERN-00d084?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
+# DevLens Lite
+
+**Understand any public GitHub repository in minutes.**
+
+DevLens Lite is an AI-powered GitHub repository analyzer that helps developers quickly understand unfamiliar codebases. Paste a public GitHub repository URL, and DevLens automatically clones the repository, analyzes its structure, detects technologies and dependencies, calculates code metrics, and provides an AI assistant for asking questions about the codebase.
+
+**Live Demo:** [devlens-lite.netlify.app](https://devlens-lite.netlify.app/)
 
 ---
 
 ## ✨ Features
 
-| Feature | Description |
-|---------|-------------|
-| 🔐 **Auth** | Register / login with JWT + bcrypt password hashing |
-| 📦 **Repo Import** | Paste a public GitHub URL — DevLens fetches its metadata via the GitHub API and clones it |
-| 🧠 **Tech Detection** | Detects frameworks, languages, databases, and tools from `package.json`, config files, and file extensions |
-| 🕸️ **Dependency Graph** | Interactive graph of internal module imports, built with React Flow |
-| 🤖 **AI Assistant** | Ask questions about the repository (auth flow, tech stack, DB connection, etc.) — powered by Google Gemini |
-| 📄 **Reports** | Export a PDF or JSON summary of any analysis |
-| 🐳 **Docker Compose** | One command to run MongoDB, the API, and the frontend together |
+### 🔐 Authentication
 
-DevLens Lite is intentionally scoped as a **portfolio / interview project** — it favors a
-small, explainable feature set over an exhaustive one.
+* User registration and login
+* JWT-based authentication
+* Profile editing
+* Password change
 
----
+### 📦 Repository Analysis
 
-## 🧱 Tech Stack
+* Import any public GitHub repository using its URL
+* Automatically clone and analyze repositories
+* Real-time analysis status and progress
 
-- **Frontend:** React + Vite, Tailwind CSS, React Query, Zustand, React Flow, Axios
-- **Backend:** Node.js + Express, MongoDB + Mongoose, JWT, bcrypt
-- **AI:** Google Gemini API (`@google/generative-ai`)
-- **Repo import:** GitHub REST API (metadata) + `simple-git` (cloning)
-- **Reports:** `pdfkit` (PDF), native JSON export
-- **Infra:** Docker + Docker Compose, Nginx (frontend static hosting)
+### 🛠️ Technology Detection
 
----
+Automatically identifies:
 
-## 🏗️ Architecture
+* Programming languages
+* Frameworks
+* Libraries and tools
+* Project configuration
 
-```
-GitHub URL
-   │
-   ▼
-Backend (Express)
-   │
-   ├─ 1. Fetch metadata from the GitHub REST API (description, language, stars, forks)
-   ├─ 2. Clone the repo locally with simple-git (shallow clone)
-   ├─ 3. Analyze:
-   │      • tech.detector.js       – scans package.json / config files / extensions
-   │      • structure.analyzer.js  – walks the file tree, counts files/lines/languages
-   │      • dependency.analyzer.js – builds an internal import graph + external deps
-   └─ 4. Store the Analysis document in MongoDB, mark the Repository "complete"
-   │
-   ▼
-Frontend polls /repositories/:id/status until complete, then shows:
-   Analysis · Dependency Graph · AI Assistant · Report generation
-```
+### 📊 Code Metrics
 
-Backend module layout (`routes → controllers → services → models`):
+Get an overview of:
 
-```
-backend/src/
-├── app.js                     # Express app, middleware, route mounting
-├── server.js                  # Entry point
-├── analyzers/                 # Pure functions: tech detection, structure, dependencies
-├── middleware/                # authenticate, validate, rateLimiter, errorHandler
-├── models/                    # User, Repository, Analysis, ChatSession, Report
-├── modules/
-│   ├── auth/                  # register, login, profile, change password
-│   ├── repositories/          # import, list, delete, re-analyze, status polling
-│   ├── analysis/               # read analysis results
-│   ├── chat/                    # Gemini-powered Q&A sessions per repository
-│   └── reports/                  # PDF / JSON report generation + download
-└── shared/                        # AppError, response helpers
-```
+* Total files and folders
+* Lines of code
+* Language distribution
+* Largest files
 
-Frontend layout mirrors the pages listed below, with a small set of shared
-`hooks/` (React Query) and `api/` (Axios) modules per feature.
+### 🔗 Dependency Visualization
+
+* Interactive internal import/dependency graph using React Flow
+* External package and dependency list
+* Visual representation of project structure
+
+### 🤖 AI Codebase Assistant
+
+Ask questions about the imported repository using Google Gemini.
+
+Examples:
+
+* "What does this project do?"
+* "Explain the authentication flow."
+* "Where is the database connection handled?"
+* "How does the frontend communicate with the backend?"
+
+If a Gemini API key is not configured, DevLens automatically uses a rule-based fallback responder.
+
+### 📄 Reports
+
+Generate and download repository analysis reports in:
+
+* PDF
+* JSON
+
+### 🌓 Themes
+
+* Light mode
+* Dark mode
 
 ---
 
-## 📄 Pages
+## 🏗️ Tech Stack
 
-| Page | Description |
-|------|-------------|
-| Landing | Public marketing page |
-| Login / Register | JWT auth |
-| Dashboard | Repo count, recent repos, top languages, import button |
-| Repositories | List + search all imported repos |
-| Repository Detail | Hub for a single repo — status, tech stack, links to Analysis, Dependency Graph, AI Assistant, and Report generation |
-| Analysis | File structure, language breakdown, tech stack, largest files |
-| Dependency Graph | Interactive internal import graph + external package list |
-| AI Assistant | Chat interface scoped to one repository |
-| Reports | Generate and download PDF/JSON reports |
-| Settings / Profile | Theme, sign out, update name/bio/password |
+| Category     | Technologies                                                                           |
+| ------------ | -------------------------------------------------------------------------------------- |
+| **Frontend** | React 19, Vite, Tailwind CSS, React Query, React Router, React Flow, Recharts, Zustand |
+| **Backend**  | Node.js, Express.js, Mongoose, JWT, bcryptjs, simple-git, PDFKit                       |
+| **Database** | MongoDB                                                                                |
+| **AI**       | Google Gemini                                                                          |
+| **DevOps**   | Docker, Docker Compose, Nginx, GitHub Actions                                          |
 
 ---
 
-## 🚀 Quick Start (Docker — recommended)
+## 📁 Project Structure
+
+```text
+devlens-lite/
+├── backend/              # Node.js + Express API
+├── frontend/             # React + Vite frontend
+├── docker/               # Nginx configuration
+├── scripts/              # Setup scripts
+├── docs/                 # Documentation
+└── docker-compose.yml    # Docker services configuration
+```
+
+---
+
+## 🚀 Quick Start with Docker
+
+### 1. Clone the repository
 
 ```bash
-# 1. Clone
-git clone https://github.com/your-username/devlens-lite.git
+git clone https://github.com/Aditee26/devlens-lite.git
 cd devlens-lite
-
-# 2. Configure
-cp .env.example .env
-# Edit .env → set JWT_SECRET and GEMINI_API_KEY
-
-# 3. Run
-docker compose up --build
-
-# 4. Open
-open http://localhost:3000
 ```
 
-> The frontend is a static build, so `VITE_API_URL` is baked in at *build* time.
-> If your backend isn't reachable at `http://localhost:4000/api/v1`, set
-> `VITE_API_URL` in your shell before running `docker compose up --build`.
-
----
-
-## 💻 Local Development (without Docker)
+### 2. Configure environment variables
 
 ```bash
-# Install dependencies
-cd backend  && npm install && cd ..
-cd frontend && npm install && cd ..
-
-# Start MongoDB (Docker, or your own local install)
-docker run -d -p 27017:27017 mongo:7
-
-# Terminal 1 – Backend
-cd backend && cp ../.env.example .env   # edit values as needed
-npm run dev
-
-# Terminal 2 – Frontend
-cd frontend && npm run dev
+cp .env.example .env
 ```
 
-Or use the helper script: `bash scripts/setup.sh`
+Update `.env` with your MongoDB connection string and JWT secret.
+
+A Gemini API key is optional.
+
+### 3. Start the application
+
+```bash
+docker compose up --build
+```
+
+### 4. Open the application
+
+```text
+http://localhost:3000
+```
 
 ---
 
-## 🔑 Environment Variables
+## 💻 Local Development
 
-Copy `.env.example` → `.env` and fill in:
+### Backend
 
-| Variable | Required | Description |
-|----------|----------|--------------|
-| `PORT` | ✅ | Backend port (default `4000`) |
-| `MONGO_URI` | ✅ | MongoDB connection string |
-| `JWT_SECRET` | ✅ | Random secret used to sign JWTs |
-| `JWT_EXPIRES_IN` | ✅ | Token lifetime (e.g. `7d`) |
-| `GEMINI_API_KEY` | ⚡ Optional | Enables AI chat; without it, chat falls back to a simple rule-based responder |
-| `GITHUB_TOKEN` | ⚡ Optional | Raises the GitHub API rate limit from 60 to 5,000 requests/hour |
-| `CLONE_DIR` | ✅ | Directory used to clone repos locally (`/tmp/repos`) |
-| `CLIENT_URL` | ✅ | Frontend origin, used for CORS |
-| `VITE_API_URL` | ✅ | Frontend → backend base URL |
+```bash
+cd backend
+npm install
+cp ../.env.example .env
+npm run dev
+```
 
-Generate a JWT secret:
+Backend runs on:
+
+```text
+http://localhost:4000
+```
+
+### Frontend
+
+Open a new terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs on:
+
+```text
+http://localhost:3000
+```
+
+### MongoDB
+
+DevLens requires MongoDB. You can use a local MongoDB installation or run MongoDB with Docker:
+
+```bash
+docker run -d \
+  -p 27017:27017 \
+  --name devlens-mongo \
+  mongo:7
+```
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env` file using `.env.example`.
+
+| Variable         | Required | Description                            |
+| ---------------- | -------- | -------------------------------------- |
+| `NODE_ENV`       | No       | `development` or `production`          |
+| `PORT`           | No       | Backend port. Default: `4000`          |
+| `MONGO_URI`      | Yes      | MongoDB connection string              |
+| `JWT_SECRET`     | Yes      | Secret used to sign JWT tokens         |
+| `JWT_EXPIRES_IN` | No       | Token lifetime. Default: `7d`          |
+| `GEMINI_API_KEY` | No       | Enables Gemini-powered AI chat         |
+| `GITHUB_TOKEN`   | No       | Increases GitHub API rate limits       |
+| `CLONE_DIR`      | Yes      | Directory used for cloned repositories |
+| `CLIENT_URL`     | Yes      | Frontend URL used for CORS             |
+| `VITE_API_URL`   | Yes      | Backend API URL used by the frontend   |
+
+### Generate a JWT Secret
 
 ```bash
 node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
@@ -169,86 +213,167 @@ node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 
 ---
 
-## 🐙 GitHub Repository Import
+## 🔌 API
 
-Pasting a `github.com/owner/repo` URL:
+Base API path:
 
-1. Validates the URL and creates a `Repository` document with status `pending`.
-2. Calls the GitHub REST API (`GET /repos/{owner}/{repo}`) to populate
-   description, primary language, star count, fork count, and default branch.
-3. Shallow-clones the repo (`git clone --depth 1`) into `CLONE_DIR`.
-4. Runs the analyzers and stores the result in an `Analysis` document.
-5. Marks the repository `complete` (or `error`, with a message, if any step fails).
-
-The frontend polls `/repositories/:id/status` every 2 seconds while the
-pipeline is running.
-
----
-
-## 🤖 Gemini Integration
-
-`chat.service.js` builds a system prompt from the repository's stored
-`Analysis` (tech stack, file/line counts, language breakdown, top
-dependencies) and sends it to Gemini alongside the conversation history for
-that chat session. The Gemini API key is only ever used **server-side** — it
-is never sent to or exposed in the frontend. If no key is configured, a
-simple keyword-based fallback answers common questions (tech stack, metrics,
-dependencies) so the feature still works without an API key.
-
----
-
-## 📊 Reports
-
-`POST /api/v1/reports` generates a PDF (via `pdfkit`) or JSON file from the
-latest `Analysis` for a repository, saves it to disk, and stores a `Report`
-document (with a 7-day TTL index so old files expire automatically).
-`GET /api/v1/reports/:id/download` streams the file back to the browser.
-
----
-
-## 🐳 Docker
-
-```bash
-docker compose up --build
+```text
+/api/v1
 ```
 
-- `mongo` – MongoDB 7 with a persistent volume
-- `backend` – Node/Express API, with a volume for cloned repos
-- `frontend` – Vite build served by Nginx
+Health check:
 
-Each service has its own `Dockerfile`; `docker-compose.yml` wires them
-together with a shared network.
-
----
-
-## 🛠️ Troubleshooting
-
-| Problem | Fix |
-|---------|-----|
-| `MongoServerError: connect ECONNREFUSED` | Make sure MongoDB is running and `MONGO_URI` is correct |
-| Repository stuck on "cloning" | Check the backend logs — likely an invalid/private repo URL, or `CLONE_DIR` isn't writable |
-| AI chat replies with a generic fallback | `GEMINI_API_KEY` isn't set, or the key is invalid |
-| CORS errors in the browser console | `CLIENT_URL` on the backend must match the frontend's origin |
-| Frontend can't reach the API | Check `VITE_API_URL` — remember it's baked in at build time |
-
----
-
-## 📁 Project Structure
-
-```
-devlens-lite/
-├── backend/               # Express API
-├── frontend/              # React (Vite) app
-├── docs/                  # Additional docs
-├── scripts/                # setup.sh helper script
-├── docker-compose.yml
-├── .env.example
-├── README.md
-└── INTERVIEW_GUIDE.md      # Talking points for explaining this project
+```text
+GET /api/health
 ```
 
+### Authentication
+
+| Method | Endpoint         | Description      |
+| ------ | ---------------- | ---------------- |
+| POST   | `/auth/register` | Register a user  |
+| POST   | `/auth/login`    | Login            |
+| GET    | `/auth/me`       | Get current user |
+| PATCH  | `/auth/profile`  | Update profile   |
+| PATCH  | `/auth/password` | Change password  |
+
+### Repositories
+
+| Method | Endpoint                    | Description            |
+| ------ | --------------------------- | ---------------------- |
+| GET    | `/repositories`             | List repositories      |
+| POST   | `/repositories`             | Import a repository    |
+| GET    | `/repositories/:id`         | Get repository details |
+| DELETE | `/repositories/:id`         | Delete repository      |
+| POST   | `/repositories/:id/analyze` | Start analysis         |
+| GET    | `/repositories/:id/status`  | Get analysis status    |
+
+### Analysis
+
+| Method | Endpoint                       | Description             |
+| ------ | ------------------------------ | ----------------------- |
+| GET    | `/analysis/repository/:repoId` | Get repository analysis |
+| GET    | `/analysis/:id`                | Get analysis by ID      |
+
+### AI Chat
+
+| Method | Endpoint                     | Description         |
+| ------ | ---------------------------- | ------------------- |
+| GET    | `/chat/repository/:repoId`   | Get repository chat |
+| POST   | `/chat/sessions`             | Create chat session |
+| GET    | `/chat/sessions/:id`         | Get chat session    |
+| DELETE | `/chat/sessions/:id`         | Delete chat session |
+| POST   | `/chat/sessions/:id/message` | Send a message      |
+
+### Reports
+
+| Method | Endpoint                | Description       |
+| ------ | ----------------------- | ----------------- |
+| GET    | `/reports`              | List reports      |
+| POST   | `/reports`              | Generate a report |
+| GET    | `/reports/:id/download` | Download report   |
+| DELETE | `/reports/:id`          | Delete report     |
+
+All endpoints except user registration and login require a Bearer token.
+
 ---
 
-## 📜 License
+## 🔄 How DevLens Works
 
-MIT — built as a personal portfolio project.
+```text
+GitHub Repository URL
+        ↓
+Clone Repository
+        ↓
+Analyze Codebase
+        ↓
+Detect Technologies
+        ↓
+Calculate Metrics
+        ↓
+Build Dependency Graph
+        ↓
+Generate Repository Summary
+        ↓
+AI Assistant + Reports
+```
+
+---
+
+## 🐳 Docker Architecture
+
+DevLens can be run as a containerized application using Docker Compose.
+
+```text
+              ┌─────────────────┐
+              │     Browser     │
+              └────────┬────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │      Nginx      │
+              │ Reverse Proxy   │
+              └───────┬─────────┘
+                      │
+             ┌────────┴────────┐
+             ▼                 ▼
+      ┌─────────────┐   ┌─────────────┐
+      │   React     │   │   Express   │
+      │  Frontend   │   │   Backend   │
+      └─────────────┘   └──────┬──────┘
+                               │
+                       ┌───────┴────────┐
+                       ▼                ▼
+                ┌────────────┐   ┌────────────┐
+                │  MongoDB   │   │  Gemini AI │
+                └────────────┘   └────────────┘
+```
+
+---
+
+## 🌐 Deployment
+
+The application can be deployed with:
+
+* **Frontend:** Netlify
+* **Backend:** Render
+* **Database:** MongoDB Atlas
+* **Containerization:** Docker / Docker Compose
+* **Reverse Proxy:** Nginx
+* **CI/CD:** GitHub Actions
+
+See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for deployment instructions.
+
+---
+
+## 🎯 Use Cases
+
+DevLens Lite is useful for:
+
+* Understanding unfamiliar GitHub repositories
+* Quickly onboarding onto existing projects
+* Exploring project architecture
+* Finding dependencies and imports
+* Getting an overview of large codebases
+* Asking natural-language questions about code
+* Generating project analysis reports
+
+---
+
+## 📌 Future Improvements
+
+* Private GitHub repository support
+* More programming language analyzers
+* Improved code-level dependency mapping
+* Persistent AI conversation context
+* Repository comparison
+* Advanced architecture visualizations
+* Pull request analysis
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+© DevLens Lite

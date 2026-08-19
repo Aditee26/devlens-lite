@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --scrollbar-track: #f1f0ec;
+    --scrollbar-thumb: #d8d6d1;
+  }
+  .dark {
+    --scrollbar-track: #171613;
+    --scrollbar-thumb: #3a3733;
+  }
+
+  * { @apply border-line dark:border-line-dark; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-paper dark:bg-ink-900 text-ink-800 dark:text-ink-100 font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar         { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track   { background: var(--scrollbar-track); }
+  ::-webkit-scrollbar-thumb   { background: var(--scrollbar-thumb); border-radius: 4px; }
+
+  ::selection { background: #4a5fa030; }
+}
+
+@layer components {
+  /* Base content surface — used sparingly, not as a default wrapper */
+  .surface {
+    @apply bg-paper-surface dark:bg-ink-800 border border-line dark:border-line-dark;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded text-sm font-medium
+           transition-colors duration-100 disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-ink-800 hover:bg-ink-900 dark:bg-ink-50 dark:hover:bg-white text-white dark:text-ink-900;
+  }
+  .btn-secondary {
+    @apply btn bg-transparent border border-line dark:border-line-dark hover:bg-ink-50 dark:hover:bg-ink-800 text-ink-700 dark:text-ink-200;
+  }
+  .btn-ghost {
+    @apply btn hover:bg-ink-50 dark:hover:bg-ink-800 text-ink-500 dark:text-ink-400;
+  }
+  .btn-danger {
+    @apply btn bg-transparent border border-red-300 dark:border-red-900/50 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40;
+  }
+
+  .input {
+    @apply w-full px-3 py-2 rounded bg-paper-surface dark:bg-ink-800 border border-line dark:border-line-dark
+           text-ink-800 dark:text-ink-100 placeholder-ink-300 dark:placeholder-ink-500
+           focus:outline-none focus:ring-1 focus:ring-ink-500 focus:border-ink-500 dark:focus:ring-ink-200 dark:focus:border-ink-200
+           transition-colors text-sm;
+  }
+  .label {
+    @apply block text-xs font-medium text-ink-500 dark:text-ink-400 uppercase tracking-wide mb-1.5;
+  }
+
+  /* Status labels: a colored dot + text rather than a filled pill —
+     communicates state without adding visual weight. */
+  .tag {
+    @apply inline-flex items-center gap-1.5 text-xs font-medium text-ink-600 dark:text-ink-300;
+  }
+  .tag-dot { @apply w-1.5 h-1.5 rounded-full flex-shrink-0; }
+  .tag-green  .tag-dot { @apply bg-emerald-600; }
+  .tag-blue   .tag-dot { @apply bg-accent-500; }
+  .tag-yellow .tag-dot { @apply bg-amber-500; }
+  .tag-red    .tag-dot { @apply bg-red-600; }
+  .tag-gray   .tag-dot { @apply bg-ink-400; }
+
+  /* Small filled label, used only where a pill genuinely reads better
+     (e.g. file-format markers) */
+  .chip {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium border;
+  }
+  .chip-neutral { @apply chip border-line dark:border-line-dark text-ink-500 dark:text-ink-400; }
+
+  .page-title    { @apply font-serif text-[26px] leading-tight text-ink-900 dark:text-white; }
+  .section-title { @apply text-[13px] font-semibold text-ink-800 dark:text-ink-100 uppercase tracking-wide; }
+  .text-muted    { @apply text-sm text-ink-500 dark:text-ink-400; }
+
+  .skeleton {
+    @apply animate-pulse bg-ink-100 dark:bg-ink-800 rounded;
+  }
+
+  /* Table */
+  .data-table { @apply w-full text-sm border-collapse; }
+  .data-table th {
+    @apply text-left text-[11px] font-semibold uppercase tracking-wide text-ink-400 dark:text-ink-500
+           border-b border-line dark:border-line-dark py-2.5 px-3 first:pl-0 last:pr-0;
+  }
+  .data-table td {
+    @apply py-3 px-3 border-b border-line dark:border-line-dark align-middle first:pl-0 last:pr-0;
+  }
+  .data-table tr:last-child td { @apply border-b-0; }
+
+  /* Code blocks */
+  pre { @apply font-mono text-sm; }
+  code { @apply font-mono; }
+}
+
+/* React Flow overrides */
+.react-flow__node {
+  @apply font-sans;
+}
+.react-flow__attribution {
+  display: none !important;
+}
